@@ -13,4 +13,18 @@
   }
   return max
 };
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+ var maxArea2 = function (height) {
+  let max = 0
+  let l = 0
+  let r = height.length - 1
+  while (l < r) {
+      const minHeight = height[l] < height[r] ? height[l++] : height[r--]
+      max = Math.max(max, (r - l + 1) * minHeight)
+  }
+  return max
+};
 console.log(maxArea([1,8,6,2,5,4,8,3,7])); // 49
