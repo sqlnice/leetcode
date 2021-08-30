@@ -2,7 +2,6 @@
  * @lc app=leetcode.cn id=202 lang=typescript
  *
  * [202] 快乐数
- * Set的方式
  */
 
 // @lc code=start
@@ -26,6 +25,5 @@ function isHappy(n: number): boolean {
   }
   return n === 1
 };
-isHappy(19)
 // @lc code=end
 
