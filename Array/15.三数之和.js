@@ -7,7 +7,7 @@
   const result = []
   const length = nums.length
   if (!Array.isArray(nums) || length === 0) return result
-  nums.sort((a, b) => { return a - b }) // 排序后格式 [0,1,2,3,4,5,6]
+  nums.sort((a, b) => { return a - b }) // 排序后格式 [-3,-2,-1,0,1,2,3,4,5,6]
   for (let i = 0; i < length; i++) {
       // 最外层循环判断
       if (nums[i] > 0) break // 如果大于0，终止循环
