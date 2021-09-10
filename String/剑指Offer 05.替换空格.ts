@@ -12,24 +12,26 @@ function replaceSpace(s: string,): string {
   const strArr = Array.from(s)
   let length = strArr.length
   let spaceCount = 0
-  // 字符串中有几个空格
-  for(let i = 0; i < length; i++) {
-    if(strArr[i] === ' ')spaceCount++
+  // 字符串中有几个空格
+  for (let i = 0; i < length; i++) {
+      if (strArr[i] === ' ') spaceCount++
   }
   let left = length - 1
-  let right = length + spaceCount *2 - 1
-  // 双指针从后向前走
+  let right = length + spaceCount * 2 - 1
+  // 双指针从后向前走
   while (left >= 0) {
-    if(strArr[left]===' '){
-      strArr[right--] = '0'
-      strArr[right--] = '2'
-      strArr[right--] = '%'
-    }else {
-      strArr[right--] = strArr[left--]
-    }
+      if (strArr[left] === ' ') {
+          strArr[right--] = '0'
+          strArr[right--] = '2'
+          strArr[right--] = '%'
+          left--
+      } else {
+          strArr[right--] = strArr[left--]
+      }
   }
 
   return strArr.join("")
 };
 // @lc code=end
 
+replaceSpace("We are happy.")
