@@ -7,9 +7,16 @@
 // @lc code=start
 function maxSlidingWindow(nums: number[], k: number): number[] {
   const len = nums.length;
-  const result: number[] = [];
   const queue: number[] = [];
-  for (let i = 0; i < len; i++) {
+  for (let i = 0; i < k; i++) {
+    while (queue.length && nums[i] >= nums[queue[queue.length - 1]]) {
+      queue.pop();
+    }
+    queue.push(i);
+  }
+  const result: number[] = [nums[queue[0]]];
+
+  for (let i = k; i < len; i++) {
     // 当前的值比滑动窗口内的值大
     while (queue.length && nums[i] > nums[queue[queue.length - 1]]) {
       queue.pop();
@@ -19,8 +26,7 @@ function maxSlidingWindow(nums: number[], k: number): number[] {
     while (queue[0] <= i - k) {
       queue.shift();
     }
-    // 可以把前k个循环放在外面，更快
-    i >= k - 1 && result.push(nums[queue[0]]);
+    result.push(nums[queue[0]]);
   }
   return result;
 }
