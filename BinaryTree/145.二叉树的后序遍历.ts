@@ -18,17 +18,32 @@
  *     }
  * }
  */
+// 递归
+// function postorderTraversal(root: TreeNode | null): number[] {
+//   const res: number[] = [];
 
+//   const postorder = (root: TreeNode) => {
+//     if (!root) return;
+//     postorder(root.left);
+//     postorder(root.right);
+//     res.push(root.val);
+//   };
+//   postorder(root);
+//   return res;
+// }
+
+// 迭代
 function postorderTraversal(root: TreeNode | null): number[] {
   const res: number[] = [];
-
-  const postorder = (root: TreeNode) => {
-    if (!root) return;
-    postorder(root.left);
-    postorder(root.right);
-    res.push(root.val);
-  };
-  postorder(root);
-  return res;
+  if (!root) return res;
+  const stack = [root];
+  let cur = null;
+  while (stack.length) {
+    cur = stack.pop();
+    res.push(cur.val);
+    cur.left && stack.push(cur.left);
+    cur.right && stack.push(cur.right);
+  }
+  return res.reverse();
 }
 // @lc code=end
