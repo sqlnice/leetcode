@@ -19,19 +19,39 @@
  * }
  */
 
+// 层级遍历
+// function maxDepth(root: TreeNode | null): number {
+//   if (!root) return 0;
+//   let res = 0;
+//   const queue = [root];
+//   while (queue.length) {
+//     let length = queue.length;
+//     res++;
+//     while (length--) {
+//       const node = queue.shift();
+//       node.left && queue.push(node.left);
+//       node.right && queue.push(node.right);
+//     }
+//   }
+//   return res;
+// }
+
+// 递归遍历
 function maxDepth(root: TreeNode | null): number {
-  if (!root) return 0;
-  let res = 0;
-  const queue = [root];
-  while (queue.length) {
-    let length = queue.length;
-    res++;
-    while (length--) {
-      const node = queue.shift();
-      node.left && queue.push(node.left);
-      node.right && queue.push(node.right);
-    }
-  }
-  return res;
+  // 递归三部曲
+  // 1.确定递归函数的参数和返回值
+  const getDepth = (node: TreeNode | null) => {
+    // 2.确定边界条件
+    if (!node) return 0;
+
+    // 3.确定单层逻辑
+    const leftDepth = getDepth(node.left);
+    const rightDepth = getDepth(node.right);
+
+    const depth: number = Math.max(leftDepth, rightDepth) + 1;
+    return depth;
+  };
+
+  return getDepth(root);
 }
 // @lc code=end
