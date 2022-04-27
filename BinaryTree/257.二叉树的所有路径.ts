@@ -33,28 +33,59 @@
 //   return resArr
 // }
 // 迭代
+// function binaryTreePaths(root: TreeNode | null): string[] {
+//   if (!root) return []
+//   const stack: TreeNode[] = [root]
+//   const routes = ['']
+//   const resArr: string[] = []
+//   while (stack.length) {
+//     const node = stack.pop()
+//     let route = routes.pop()
+//     if (!node.left && !node.right) {
+//       resArr.push(route + node.val)
+//       continue
+//     }
+//     route += node.val + '->'
+//     if (node.left) {
+//       stack.push(node.left)
+//       routes.push(route)
+//     }
+//     if (node.right) {
+//       stack.push(node.right)
+//       routes.push(route)
+//     }
+//   }
+//   return resArr
+// }
+// 回溯
 function binaryTreePaths(root: TreeNode | null): string[] {
-  if (!root) return []
-  const stack: TreeNode[] = [root]
-  const routes = ['']
-  const resArr: string[] = []
-  while (stack.length) {
-    const node = stack.pop()
-    let route = routes.pop()
-    if (!node.left && !node.right) {
-      resArr.push(route + node.val)
-      continue
+  const getPath = (root:TreeNode | null, path:number[], result:string[]) => {
+        path.push(root.val);
+        if (root.left === null && root.right === null) {
+            let n = path.length;
+            let str = '';
+            for (let i=0; i<n-1; i++) {
+                str += path[i] + '->';
+            }
+            str += path[n-1];
+            result.push(str);
+        }
+
+        if (root.left !== null) {
+            getPath(root.left, path, result);
+            path.pop();   // 回溯
+        }
+
+        if (root.right !== null) {
+            getPath(root.right, path, result);
+            path.pop(); 
+        }
     }
-    route += node.val + '->'
-    if (node.left) {
-      stack.push(node.left)
-      routes.push(route)
-    }
-    if (node.right) {
-      stack.push(node.right)
-      routes.push(route)
-    }
-  }
-  return resArr
+    
+    if (root === null) return [];
+    let result:string[] = [];
+    let path:number[] = [];
+    getPath(root, path, result);
+    return result;
 }
 // @lc code=end
