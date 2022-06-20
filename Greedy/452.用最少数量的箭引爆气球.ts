@@ -20,7 +20,7 @@
 function findMinArrowShots(points: number[][]): number {
   if (!points.length) return 0;
   let result: number = 1; // 必有一支箭
-
+  points.sort((a, b) => a[0] - b[0]);
   for (let i = 1; i < points.length; i++) {
     // 当前线开始小于等于前一条线的结束，则两条线相交
     if (points[i][0] <= points[i - 1][1]) {
